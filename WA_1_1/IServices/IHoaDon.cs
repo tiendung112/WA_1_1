@@ -1,4 +1,5 @@
 ﻿using WA_1_1.Entitites;
+using WA_1_1.Pagination;
 using WA_1_1.PayLoads.DTOs;
 using WA_1_1.PayLoads.Requests;
 using WA_1_1.PayLoads.Responses;
@@ -12,7 +13,9 @@ namespace WA_1_1.IServices
         ErrorType XoaHoaDon(int id);
         ErrorType UpdateHoaDon(HoaDon HoaDonCanSua);
         ResponseObject<HoaDonDTO> ThemHoaDonRequest(ThemHoaDonRequest request);
+        IQueryable<HoaDonDTO> GetAll(Pagintation pagintation);
         IQueryable<HoaDonDTO> GetAll();
+
         IQueryable<HoaDonDTO> GetHoaDonTheoNgay();
         ResponseObject<HoaDonDTO> XoaHoaDon(XoaHoaDonRequest xoaHoaDonRequest);
         ResponseObject<HoaDonDTO> SuaHoaDon(SuaHoaDonRequest suaHoaDonRequest);
