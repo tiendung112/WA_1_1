@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WA_1_1.Entitites;
+using WA_1_1.Pagination;
+using WA_1_1.PayLoads.DTOs;
 using WA_1_1.PayLoads.Requests;
 using WA_1_1.Services;
 
@@ -35,7 +37,15 @@ namespace WA_1_1.Controllers
         {
             return Ok(services.GetAll());
         }
-
+        [HttpGet("getAllPhaNTrang")]
+        public IActionResult GetAllPT([FromQuery] Pagintation pagintation)
+        {
+            var hd = services.GetAll(pagintation);
+            var hdRs = PageResult<HoaDonDTO>.toPageResult(pagintation, hd);
+            pagintation.TotalCount = hd.Count();
+            var res =new PageResult<HoaDonDTO> (pagintation,hdRs);
+            return Ok(res);
+        }
         [HttpDelete("XoaHoaDon")]
         public IActionResult Delete(XoaHoaDonRequest id)
         {

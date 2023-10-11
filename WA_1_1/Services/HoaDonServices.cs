@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 using WA_1_1.Context;
 using WA_1_1.Entitites;
 using WA_1_1.IServices;
+using WA_1_1.Pagination;
 using WA_1_1.PayLoads.Converters;
 using WA_1_1.PayLoads.DTOs;
 using WA_1_1.PayLoads.Requests;
@@ -393,5 +394,10 @@ namespace WA_1_1.Services
             return lstHoaDon;
         }
 
+        public IQueryable<HoaDonDTO> GetAll(Pagintation pagintation)
+        {
+            var lstHD = context.HoaDon.Include(x => x.chiTietHoaDon).Select(x => converter.EntityToDTO(x));
+            return lstHD;
+        }
     }
 }
